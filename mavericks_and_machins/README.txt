@@ -29,7 +29,7 @@ In addition, this project will include:
 
 Wireframes
 
-![image](https://github.com/cjc473/Election-Visualization/issues/1#issue-1039724877)
+https://github.com/cjc473/Election-Visualization/issues/1#issue-1039724877
 
 Technologies, Libraries, APIs
 The project will be implemented with the following technologies:
