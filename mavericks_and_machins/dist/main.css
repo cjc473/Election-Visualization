@@ -18,13 +18,42 @@ h1, h2, p, strong, em, a {
 
 #whole-page-container {
   display: flex;
-  justify-content: space-around;
+  /* justify-content: space-around; */
+  /* flex-wrap: wrap;
+  gap: 1rem; */
 }
 
 h1 {
   display: flex;
   justify-content: center;
 }
+
+#options-sidebar-container {
+  display: flex;
+  flex-direction: column;
+  margin: 0.5em;
+  border-width: 1px;
+  border-style: solid;
+  border-color: black;
+  /* flex-wrap: wrap; */
+  flex-basis: 10rem;
+  flex-grow: 1;
+  background-color: lightyellow;
+}
+
+#options-sidebar-container h2, label {
+  font-family: monospace;
+  /* display: flex; */
+}
+
+#d3-container {
+  font-family: monospace;
+  flex-basis: 0;
+  flex-grow: 999;
+  min-width: 50%;
+  background-color: paleturquoise;
+}
+
 
 #year-slider-container {
   display: flex;
