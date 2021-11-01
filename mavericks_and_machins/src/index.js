@@ -9,15 +9,21 @@ const width = 900;
 const height = 900;
 const margin = { top: 200, bottom: 200, left: 200, right: 200 };
 
-const svg = d3.select('#d3-container')
-  .append('svg')
-  .attr('width', width - margin.left - margin.right)
-  .attr('height', height - margin.top - margin.bottom)
-  .attr('viewBox', [0, 0, width, height])
+// const svg = d3.select('#d3-container')
+//   .append('svg')
+//   .attr('width', width - margin.left - margin.right)
+//   .attr('height', height - margin.top - margin.bottom)
+//   .attr('viewBox', [0, 0, width, height])
 
 // graph for senators with highest rate of party-aligned vote
 
 const renderHighestGraph = function(data) {
+
+  let svg1 = d3.select('#d3-container')
+    .append('svg')
+    .attr('width', (width - margin.left - margin.right) / 2)
+    .attr('height', (height - margin.top - margin.bottom) / 2)
+    .attr('viewBox', [0, 0, width, height])
   
   const x1 = d3.scaleLinear()
   .domain([95, 100])
@@ -28,7 +34,7 @@ const renderHighestGraph = function(data) {
   .range([0, height - margin.bottom])
   .padding(0.1);
   
-  const highestGraph = svg
+  const highestGraph = svg1
   .append('g')
   .attr('transform', `translate(${margin.left}, ${margin.top})`)
   .attr('fill', 'royalBlue')
@@ -50,12 +56,12 @@ const renderHighestGraph = function(data) {
   function yAxis(g) {
     g.attr('transform', `translate(${margin.left + 300}, ${margin.top})`)
     .call(d3.axisLeft(y1).tickFormat(i => data[i].name))
-    .attr('font-size', '14px')
+    .attr('font-size', '20px')
   }
   
-  svg.append('g').call(yAxis)
-  svg.append('g').call(xAxis)
-  svg.node();
+  svg1.append('g').call(yAxis)
+  svg1.append('g').call(xAxis)
+  svg1.node();
 }
 
 
@@ -63,8 +69,14 @@ const renderHighestGraph = function(data) {
 
 const renderLowestGraph = function (data) {
 
+  let svg2 = d3.select('#d3-container')
+    .append('svg')
+    .attr('width', (width - margin.left - margin.right) / 2)
+    .attr('height', (height - margin.top - margin.bottom) / 2)
+    .attr('viewBox', [0, 0, width, height])
+
   const x2 = d3.scaleLinear()
-    .domain([100, 0])
+    .domain([100, 50])
     .range([100, 0]);
 
   const y2 = d3.scaleBand()
@@ -72,9 +84,9 @@ const renderLowestGraph = function (data) {
     .range([0, height - margin.bottom])
     .padding(0.1);
 
-  const lowestGraph = svg
+  const lowestGraph = svg2
     .append('g')
-    .attr('transform', `translate(${margin.left}, ${margin.top})`)
+    .attr('transform', `translate(200, ${margin.top})`)
     .attr('fill', 'green')
     .selectAll('rect')
     .data(data.sort((a, b) => d3.descending(a.score, b.score)))
@@ -86,7 +98,7 @@ const renderLowestGraph = function (data) {
     .attr('class', 'rect')
 
   function xAxis2(g) {
-    g.attr('transform', `translate(0, ${margin.top})`)
+    g.attr('transform', `translate(100, ${margin.top})`)
       .call(d3.axisTop(x2).ticks(null, data.format))
       .attr('font-size', '20px')
   }
@@ -94,13 +106,15 @@ const renderLowestGraph = function (data) {
   function yAxis2(g) {
     g.attr('transform', `translate(${margin.left}, ${margin.top})`)
       .call(d3.axisRight(y2).tickFormat(i => data[i].name))
-      .attr('font-size', '14px')
+      .attr('font-size', '20px')
   }
 
-  svg.append('g').call(yAxis2)
-  svg.append('g').call(xAxis2)
-  svg.node();
+  svg2.append('g').call(yAxis2)
+  svg2.append('g').call(xAxis2)
+  svg2.node();
 }
+
+
 
 
 
@@ -121,8 +135,9 @@ function renderData(api) {
         const score = adjustedVotePercent
         return { name, score }
       })
+      renderLowestGraph(lowestSenators);
       renderHighestGraph(highestSenators);
-      renderLowestGraph(lowestSenators)
+
     })
 }
 
