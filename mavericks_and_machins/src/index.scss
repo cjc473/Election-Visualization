@@ -77,9 +77,61 @@ h1 {
   transition: opacity .2s;
 }
 
-/* #year-slider::-webkit-slider-thumb {
+// EDIT STARTS HERE
 
-} */
+:root {
+  --radio-filter-color: purple;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+.form-control {
+  font-family: system-ui, sans-serif;
+  font-size: 2rem;
+  font-weight: bold;
+  line-height: 1.1;
+  display: grid;
+  grid-template-columns: 1em auto;
+  gap: 0.5em;
+}
+
+input[type="radio"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: white;
+  margin: 1;
+  font: inherit;
+  color: currentColor;
+  width: 1.2em;
+  height: 1.2em;
+  border: 0.15em solid currentColor;
+  border-radius: 50%;
+  transform: translateY(-0.1em);
+  display: grid;
+  place-content: center;
+}
+
+input[type="radio"]::before {
+  content: "";
+  width: 0.65em;
+  height: 0.65em;
+  border-radius: 50%;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em var(--radio-filter-color);
+}
+
+input[type="radio"]:checked::before {
+  transform: scale(1);
+}
+
+
+
+// EDIT STARTS HERE
 
 #year-slider:hover {
   opacity: 1;
