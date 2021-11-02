@@ -46,12 +46,36 @@
           <input type="radio" id="republican" name="political_party" value="R">
           <label for="republican">Republican</label>
         </form>
+        <form id="generation">
+          <p>Generation</p>
+          <input type="radio" id="all_gen" name="generation" value="all" checked="checked">
+          <label for="all_parties">All</label><br>
+          <input type="radio" id="silent" name="generation" value="silent" checked="checked">
+          <label for="all_parties">Silent</label><br>
+          <input type="radio" id="boomer" name="generation" value="boomer">
+          <label for="democrat">Baby Boomer</label><br>
+          <input type="radio" id="x_millenial" name="generation" value="x_millenial">
+          <label for="x_millenial">X & Millenial</label>
+        </form>
+        <form id="gender">
+          <p>Gender</p>
+          <input type="radio" id="all_parties" name="political_party" value="A" checked="checked">
+          <label for="all_parties">All</label><br>
+          <input type="radio" id="democrat" name="political_party" value="D">
+          <label for="democrat">Democrat</label><br>
+          <input type="radio" id="republican" name="political_party" value="R">
+          <label for="republican">Republican</label>
+        </form>
       </div>
     </div>
 
-    <h1>Mavericks and Manchins</h1>
-    <div id="d3-container">
+    
+    <div id="graph-section">
+      <h1>Mavericks and Manchins</h1>
+      <div id="d3-container">
+      </div>
     </div>
+
   </div>
 
   <script src="src/index.js"></script>
