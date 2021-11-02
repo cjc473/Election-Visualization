@@ -27,10 +27,9 @@
       <div id="select-year-header">
         <h2>Senate Class</h2>
       </div>
-
       <div>
         <span id="year-slider-container">
-          <input type="range" min="2008" max="2020" value="2020" step="2" id="year-slider" orient="vertical">
+          <input type="range" min="2008" max="2020" value="2020" step="2" id="year-slider" orient="vertical" onchange="updateYear(this.value)">
         </span>
         <span>2008</span>
       </div>
@@ -38,12 +37,20 @@
 
       <div id="filters-container">
         <h2>Filters</h2>
+        <form id="political_party">
+          <p>Political Party</p>
+          <input type="radio" id="all_parties" name="political_party" value="A" checked="checked">
+          <label for="all_parties">All</label><br>
+          <input type="radio" id="democrat" name="political_party" value="D">
+          <label for="democrat">Democrat</label><br>
+          <input type="radio" id="republican" name="political_party" value="R">
+          <label for="republican">Republican</label>
+        </form>
       </div>
     </div>
 
-    
+    <h1>Mavericks and Manchins</h1>
     <div id="d3-container">
-          <h1>Mavericks and Manchins</h1>
     </div>
   </div>
 
