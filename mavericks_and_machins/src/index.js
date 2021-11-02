@@ -144,6 +144,8 @@ function updateYear(event) {
 // Update senator generation:
 const generation = document.getElementById('generation')
 
+
+
 generation.addEventListener("change", (event) => {
   event.preventDefault();
   generationSelection = event.target.value;
@@ -163,7 +165,7 @@ function genCalculator(dateOfBirth) {
   }
 }
 
-// Update political party:
+// Update senator political party:
 
 const politicalParty = document.getElementById('political_party')
 
@@ -173,12 +175,22 @@ politicalParty.addEventListener("change", (event) => {
   renderData(CongressApi, currentSession);
 })
 
+// Update senator gender:
+
+const gender = document.getElementById('gender')
+
+gender.addEventListener("change", (event) => {
+  event.preventDefault();
+  genderSelection = event.target.value;
+  renderData(CongressApi, currentSession)
+})
 
 
 function parseData(data) {
   let allSenators = data.results[0].members;
   allSenators = allSenators.filter(senator => partySelection === 'all' || senator.party === partySelection);
   allSenators = allSenators.filter(senator => generationSelection === 'all' || genCalculator(senator.date_of_birth) === generationSelection);
+  allSenators = allSenators.filter(senator => genderSelection === 'all' || senator.gender === genderSelection);
   allSenators = allSenators.sort((a, b) => a.votes_with_party_pct - b.votes_with_party_pct);
   const highestSenators = allSenators.slice(allSenators.length - 20).map(senator => {
     const name = senator.last_name + ", " + senator.first_name;
