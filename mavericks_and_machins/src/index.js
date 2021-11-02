@@ -1,4 +1,3 @@
-import { all } from "core-js/fn/promise";
 import * as d3 from "d3";
 import CongressApi from "./scripts/congress_api_util"
 import FundraisingApi from "./scripts/fundraising_api_util"
@@ -10,8 +9,8 @@ const width = 900;
 const height = 900;
 const margin = { top: 200, bottom: 200, left: 200, right: 200 };
 const store = {}
-// let partySelection = "all";
-// let currentSession;
+let partySelection = "A";
+let currentSession;
 // const svg = d3.select('#d3-container')
 //   .append('svg')
 //   .attr('width', width - margin.left - margin.right)
@@ -148,15 +147,15 @@ const politicalParty = document.getElementById('political_party')
 
 politicalParty.addEventListener("change", (event) => {
   event.preventDefault();
-  let selection = event.target.value 
-
+  partySelection = event.target.value 
+  renderData(CongressApi, currentSession)
 })
 
 function parseData(data) {
   let allSenators = data.results[0].members;
-  // allSenators = allSenators.filter(senator => senator.party === 'D')
+  allSenators = allSenators.filter(senator => partySelection === 'A' || senator.party === partySelection)
   allSenators = allSenators.sort((a, b) => a.votes_with_party_pct - b.votes_with_party_pct)
-  const highestSenators = allSenators.slice(80).map(senator => {
+  const highestSenators = allSenators.slice(allSenators.length - 20).map(senator => {
     const name = senator.last_name + ", " + senator.first_name;
     const adjustedVotePercent = (senator.votes_with_party_pct) % 5
     const score = adjustedVotePercent
@@ -174,7 +173,7 @@ function parseData(data) {
 }
 
 function renderData(api, yr=117) {
-  // currentSession = yr;
+  currentSession = yr;
   if (store[yr]) {
     return parseData(store[yr])
   } 
