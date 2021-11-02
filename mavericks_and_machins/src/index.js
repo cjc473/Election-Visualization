@@ -115,6 +115,11 @@ const renderLowestGraph = function (data) {
 }
 
 
+const mousePos = []
+
+// document.getElementById('year-slider') = function() {
+
+// }
 
 
 

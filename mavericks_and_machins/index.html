@@ -27,9 +27,14 @@
       <div id="select-year-header">
         <h2>Senate Class</h2>
       </div>
-      <div id="year-slider-container">
-        <input type="range" mind="1" max="100" value="50" id="year-slider" orient="vertical">
+
+      <div>
+        <span id="year-slider-container">
+          <input type="range" min="2008" max="2020" value="2020" step="2" id="year-slider" orient="vertical">
+        </span>
+        <span>2008</span>
       </div>
+
 
       <div id="filters-container">
         <h2>Filters</h2>
@@ -42,7 +47,7 @@
     </div>
   </div>
 
-  <!-- <script src="src/index.js"></script> -->
+  <script src="src/index.js"></script>
 
   <!-- DELETE ABOVE -->
   <script src="./dist/main.js"></script>
