@@ -9,7 +9,9 @@ const width = 900;
 const height = 900;
 const margin = { top: 200, bottom: 200, left: 200, right: 200 };
 const store = {}
-let partySelection = "A";
+let partySelection = "all";
+let generationSelection = 'all';
+let genderSelection = 'all';
 let currentSession;
 // const svg = d3.select('#d3-container')
 //   .append('svg')
@@ -119,7 +121,11 @@ const renderLowestGraph = function (data) {
 //pull data once!!
 // const mousePos = []
 
-// function updateYear = 
+// Update year via slider:
+
+const yearSlider = document.getElementById('year-slider')
+
+yearSlider.addEventListener("change", updateYear)
 
 function updateYear(event) {
   const sliderYear = event.target.value;
@@ -135,26 +141,45 @@ function updateYear(event) {
   return renderData(CongressApi, senateClass[sliderYear])
 }
 
+// Update senator generation:
+const generation = document.getElementById('generation')
 
+generation.addEventListener("change", (event) => {
+  event.preventDefault();
+  generationSelection = event.target.value;
+  renderData(CongressApi, currentSession)
+})
 
+function genCalculator(dateOfBirth) {
+  const year = parseInt(dateOfBirth.substring(0, 4))
+  if (year > 1924 && year < 1946) {
+    return "silent"
+  } else if (year >= 1946 && year < 1965) {
+    return "boomer"
+  } else if (year >= 1965) {
+    return "x_millenial"
+  } else {
+    return "other"
+  }
+}
 
-const yearSlider = document.getElementById('year-slider')
-
-yearSlider.addEventListener("change", updateYear)
-
+// Update political party:
 
 const politicalParty = document.getElementById('political_party')
 
 politicalParty.addEventListener("change", (event) => {
   event.preventDefault();
-  partySelection = event.target.value 
-  renderData(CongressApi, currentSession)
+  partySelection = event.target.value;
+  renderData(CongressApi, currentSession);
 })
+
+
 
 function parseData(data) {
   let allSenators = data.results[0].members;
-  allSenators = allSenators.filter(senator => partySelection === 'A' || senator.party === partySelection)
-  allSenators = allSenators.sort((a, b) => a.votes_with_party_pct - b.votes_with_party_pct)
+  allSenators = allSenators.filter(senator => partySelection === 'all' || senator.party === partySelection);
+  allSenators = allSenators.filter(senator => generationSelection === 'all' || genCalculator(senator.date_of_birth) === generationSelection);
+  allSenators = allSenators.sort((a, b) => a.votes_with_party_pct - b.votes_with_party_pct);
   const highestSenators = allSenators.slice(allSenators.length - 20).map(senator => {
     const name = senator.last_name + ", " + senator.first_name;
     const adjustedVotePercent = (senator.votes_with_party_pct) % 5
@@ -171,6 +196,10 @@ function parseData(data) {
   renderLowestGraph(lowestSenators);
   renderHighestGraph(highestSenators);
 }
+
+// to account for smaller sample size, do length/2 slice(20)
+// let generationSelection = 'all';
+// let genderSelection = 'all';
 
 function renderData(api, yr=117) {
   currentSession = yr;
