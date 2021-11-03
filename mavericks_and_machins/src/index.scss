@@ -16,6 +16,9 @@ h1, h2, p, strong, em, a {
   box-sizing: border-box;
 }
 
+body {
+  background-color: paleturquoise;
+}
 
 #whole-page-container {
   display: flex;
@@ -66,7 +69,13 @@ h2, form p {
   flex-basis: 0;
   flex-grow: 999;
   min-width: 50%;
-  background-color: paleturquoise;
+}
+
+#year-display h2 {
+  font-family: monospace;
+  font-size: 36px;
+  color: royalblue;
+  text-shadow: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black,
 }
 
 
