@@ -34,8 +34,8 @@ body {
   display: flex;
   flex-direction: column;
   margin: 0.5em;
-  flex-basis: 10rem;
-  flex-grow: 1;
+  min-width: 200px;
+  max-width: 200px;
 }
 
 #sidebar {
@@ -167,6 +167,21 @@ input[type=radio]:checked::before {
   transform: scale(1);
 }
 
+#gender {
+  margin-bottom: 0.5em;
+}
+
 #year-slider:hover {
   opacity: 1;
+}
+
+#graph-section > h1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  font-family: "Changa One";
+  font-size: 24px;
+  color: black;
+  text-decoration: underline;
+  text-decoration-color: black;
 }
