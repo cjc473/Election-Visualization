@@ -69,7 +69,7 @@ const renderHighestGraph = function(data) {
 }
 
 
-const renderLowestGraph = function (data) {
+const renderLowestGraph = function(data) {
 
   let svg1 = d3.select('#d3-container')
     .append('svg')
@@ -86,13 +86,23 @@ const renderLowestGraph = function (data) {
     .range([0, height - margin.bottom])
     .padding(0.1);
 
+  console.log(data)
+
   const lowestGraph = svg1
     .append('g')
     .attr('transform', `translate(${margin.left}, ${margin.top})`)
-    .attr('fill', 'royalBlue')
+    // .attr('fill', (data, i) => partyColor(data[i]))
     .selectAll('rect')
     .data(data.sort((a, b) => d3.descending(a.score, b.score)))
     .join('rect')
+    .attr('fill', (d, i) => {
+      console.log(data[i].name)
+      if (data[i].party === "R") {
+        return "red";
+      } else {
+        return "royalblue";
+      }
+    })
     .attr('x', 300) //was 0
     .attr('y', (d, i) => y1(i))
     .attr('height', y1.bandwidth())
@@ -125,7 +135,9 @@ const renderLowestGraph = function (data) {
 // graph for senators with lowest party-aligned vote
 
 
-
+const partyColor = (senator) => {
+  return senator.party === "R" ? "red" : "blue"
+}
 
 // const renderLowestGraph = function (data) {
 
@@ -255,16 +267,18 @@ function parseData(data) {
   allSenators = allSenators.filter(senator => genderSelection === 'all' || senator.gender === genderSelection);
   allSenators = allSenators.sort((a, b) => a.votes_with_party_pct - b.votes_with_party_pct);
 
-  console.log(allSenators)
-
   let senatorCount;
   allSenators.length < 30 ? (senatorCount = allSenators.length) / 2 : senatorCount = 15;
+
+  console.log(data);
+  console.log(allSenators);
 
   const highestSenators = allSenators.slice(allSenators.length - senatorCount).map(senator => {
     const name = senator.last_name + ", " + senator.first_name;
     const adjustedVotePercent = (senator.votes_with_party_pct) -95
     const score = adjustedVotePercent
-    return { name, score }
+    const party = senator.party
+    return { name, score, party}
   })
   
 
@@ -273,16 +287,17 @@ function parseData(data) {
     const name = senator.last_name + ", " + senator.first_name;
     const adjustedVotePercent = (senator.votes_with_party_pct)
     const score = adjustedVotePercent
-    return { name, score }
+    const party = senator.party
+    return { name, score, party }
   })
   document.getElementById('d3-container').innerHTML = ""
+
+  console.log(lowestSenators);
+  console.log(partyColor(lowestSenators[0]));
   renderLowestGraph(lowestSenators);
   renderHighestGraph(highestSenators);
 }
 
-// to account for smaller sample size, do length/2 slice(20)
-// let generationSelection = 'all';
-// let genderSelection = 'all';
 
 function renderData(api, yr=117) {
   currentSession = yr;
