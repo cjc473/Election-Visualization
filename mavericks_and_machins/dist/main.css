@@ -15,6 +15,10 @@ h1, h2, p, strong, em, a {
   background: transparent;
 }
 
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
 #whole-page-container {
   display: flex;
   /* justify-content: space-around; */
@@ -43,10 +47,17 @@ h1 {
 #options-sidebar-container h2, label {
   display: flex;
   flex-direction: row;
-  justify-content: center;
   align-items: center;
   font-family: monospace;
+  text-shadow: 0.5px 0.5px silver;
   /* display: flex; */
+}
+
+form p {
+  font-family: "kavoon";
+  display: flex;
+  justify-content: center;
+  text-shadow: 0.5px 0.5px silver;
 }
 
 #d3-container {
@@ -81,20 +92,8 @@ h1 {
   --radio-filter-color: purple;
 }
 
-*,
-*:before,
-*:after {
-  box-sizing: border-box;
-}
-
-.form-control {
-  font-family: system-ui, sans-serif;
-  font-size: 2rem;
-  font-weight: bold;
-  line-height: 1.1;
-  display: grid;
-  grid-template-columns: 1em auto;
-  gap: 0.5em;
+#filters-container {
+  margin: 2px;
 }
 
 input[type=radio] {
@@ -103,11 +102,10 @@ input[type=radio] {
   background-color: white;
   margin: 1;
   font: inherit;
-  color: currentColor;
   width: 1.2em;
   height: 1.2em;
   border: 0.15em solid currentColor;
-  border-radius: 50%;
+  border-radius: 25%;
   transform: translateY(-0.1em);
   display: grid;
   place-content: center;
@@ -115,11 +113,11 @@ input[type=radio] {
 
 input[type=radio]::before {
   content: "";
-  width: 0.65em;
-  height: 0.65em;
-  border-radius: 50%;
+  width: 0.8em;
+  height: 0.8em;
+  border-radius: 25%;
   transform: scale(0);
-  transition: 120ms transform ease-in-out;
+  transition: 140ms transform ease-in-out;
   box-shadow: inset 1em 1em var(--radio-filter-color);
 }
 
