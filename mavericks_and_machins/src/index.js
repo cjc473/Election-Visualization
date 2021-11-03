@@ -194,6 +194,22 @@ function updateYear(event) {
     2018: 116,
     2020: 117,
   }
+
+  let yearDisplayContainer = document.createElement('p')
+  let yearDisplay = document.createTextNode(`${senateClass[sliderYear]}`);
+  yearDisplayContainer.appendChild(yearDisplay);
+  document.getElementById('year-slider').appendChild(yearDisplayContainer);
+
+  // yearSlider.append('p')
+  //   < span id = "rangeValue" > 0</span>
+  //     <Input class="range" type="range" name "" value = "0" min = "0" max = "1000" onChange = "rangeSlide(this.value)" onmousemove = "rangeSlide(this.value)" ></Input >
+  //   </div >
+  //   <script type="text/javascript">
+  //     function rangeSlide(value) {
+  //       document.getElementById('rangeValue').innerHTML = value;
+  //       }
+
+
   return renderData(CongressApi, senateClass[sliderYear])
 }
 

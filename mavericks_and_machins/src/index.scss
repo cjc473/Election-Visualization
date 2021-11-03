@@ -24,10 +24,6 @@ h1, h2, p, strong, em, a {
   gap: 1rem; */
 }
 
-
-
-
-
 #options-sidebar-container {
   display: flex;
   flex-direction: column;
@@ -77,22 +73,51 @@ h2, form p {
 #year-slider-container {
   display: flex;
   justify-content: center;
-  width: 25px;
+  flex-direction: row;
+  width: 100%;
+  font-family: monospace;
+}
+#slider-ticks {
+  display: flex;
+  font-size: 10px;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+#slider-tick-values {
+  font-family: monospace;
+  font-size: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
 
 #year-slider {
   display: flex;
   justify-content: center;
-  width: 100%;
-  height: 100%;
-  writing-mode: bt-lr; 
-  -webkit-appearance: slider-vertical; 
+  -webkit-appearance: none;
+  margin-top: 0.7em;
+  width: 90%;
+  height: 6px;
   background: silver;
   outline: none;
-  opacity: 0.7;
-  -webkit-transition: .2s;
+  border: 1px solid black;
+  opacity: 0.8;
   transition: opacity .2s;
+  box-shadow: 3px 2px purple;
 }
+
+#year-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  cursor: pointer;
+  background: royalblue;
+  width: 0.6em;
+  height: 1.2em;
+  border-radius: 25%;
+  border: 1px solid black;
+}
+
+
 
 // EDIT STARTS HERE
 
@@ -117,7 +142,10 @@ input[type="radio"] {
   transform: translateY(-0.1em);
   display: grid;
   place-content: center;
+  transition: opacity .1s;
 }
+
+
 
 input[type="radio"]::before {
   content: "";
