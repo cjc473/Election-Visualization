@@ -93,7 +93,7 @@ const renderLowestGraph = function (data) {
     .selectAll('rect')
     .data(data.sort((a, b) => d3.descending(a.score, b.score)))
     .join('rect')
-    .attr('x', 500) //was 0
+    .attr('x', 300) //was 0
     .attr('y', (d, i) => y1(i))
     .attr('height', y1.bandwidth())
     .attr('width', (d) => x1(d.score))
@@ -254,13 +254,22 @@ function parseData(data) {
   allSenators = allSenators.filter(senator => generationSelection === 'all' || genCalculator(senator.date_of_birth) === generationSelection);
   allSenators = allSenators.filter(senator => genderSelection === 'all' || senator.gender === genderSelection);
   allSenators = allSenators.sort((a, b) => a.votes_with_party_pct - b.votes_with_party_pct);
-  const highestSenators = allSenators.slice(allSenators.length - 20).map(senator => {
+
+  console.log(allSenators)
+
+  let senatorCount;
+  allSenators.length < 30 ? (senatorCount = allSenators.length) / 2 : senatorCount = 15;
+
+  const highestSenators = allSenators.slice(allSenators.length - senatorCount).map(senator => {
     const name = senator.last_name + ", " + senator.first_name;
-    const adjustedVotePercent = (senator.votes_with_party_pct) % 5
+    const adjustedVotePercent = (senator.votes_with_party_pct) -95
     const score = adjustedVotePercent
     return { name, score }
   })
-  const lowestSenators = allSenators.slice(0, 20).map(senator => {
+  
+
+
+  const lowestSenators = allSenators.slice(0, senatorCount).map(senator => {
     const name = senator.last_name + ", " + senator.first_name;
     const adjustedVotePercent = (senator.votes_with_party_pct)
     const score = adjustedVotePercent
