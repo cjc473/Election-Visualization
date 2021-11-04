@@ -5,9 +5,7 @@ console.log("asdf")
 
 // setting up boundaries for each chart
 
-const width = 900;
-const height = 900;
-const margin = { top: 200, bottom: 200, left: 200, right: 200 };
+
 const store = {}
 let partySelection = "all";
 let generationSelection = 'all';
@@ -23,48 +21,51 @@ let currentSession;
 
 const renderHighestGraph = function(data) {
 
-  let svg1 = d3.select('#d3-container')
+  const margin = { top: 20, bottom: 30, left: 90, right: 30 };
+
+  const width = 460 - margin.left - margin.right;
+  const height = 400 - margin.top - margin.bottom;
+
+
+  let svg1 = d3.select('#top-senate-container')
     .append('svg')
-    .attr('width', (width / 2))
-    .attr('height', (height / 2))
-    .attr('viewBox', [0, 0, width, height])
-  
+    .attr('width', (width + margin.left + margin.right))
+    .attr('height', (height + margin.top + margin.bottom))
+    .append('g')
+    .attr('transform', `translate(${margin.left}, ${margin.top})`)
+
   const x1 = d3.scaleLinear()
-  .domain([0, 100])
-  .range([margin.left, (width / 2)]); //was margin.left
+    .domain([0, 100])
+    .range([0, width]); //was margin.left
+
+  svg1.append('g')
+    .attr("transform", `translate(0, ${height})`)
+    .call(d3.axisBottom(x1))
+    .selectAll("text")
+      .attr("transform", "translate(-10, 0)rotate(-45)")
+      .style("text-anchor", "end")
   
   const y1 = d3.scaleBand()
-  .domain(d3.range(data.length))
-  .range([0, (height / 2)])
-  .padding(0.1);
-  
-  const highestGraph = svg1
-  .append('g')
-  .attr('transform', `translate(${margin.left}, ${margin.top})`)
-  .selectAll('rect')
-  .data(data.sort((a, b) => d3.descending(a.score, b.score)))
-  .join('rect')
-  .attr('fill', (d, i) => data[i].party === "R" ? "crimson" : "royalblue")
-  .attr('x', 0) //was 0
-  .attr('y', (d, i) => y1(i))
-  .attr('height', y1.bandwidth())
-  .attr('width', d => x1(d.score))
-  .attr('class', 'rect')
-  
-  function xAxis(g) {
-    g.attr('transform', `translate(0, ${margin.top})`)
-    .call(d3.axisTop(x1).ticks(5)) //was null, data.format
-    .attr('font-size', '20px')
-  }
-  
-  function yAxis(g) {
-    g.attr('transform', `translate(${margin.left}, ${margin.top})`)
+    .domain(d3.range(data.length))
+    .range([0, height])
+    .padding(0.1);
+
+  svg1.append("g")
     .call(d3.axisLeft(y1).tickFormat(i => data[i].name))
-    .attr('font-size', '20px')
-  }
   
-  svg1.append('g').call(yAxis)
-  svg1.append('g').call(xAxis)
+
+  svg1.selectAll('rect')
+    .data(data.sort((a, b) => d3.descending(a.score, b.score)))
+    .enter()
+    .append('rect')
+    .attr('fill', (d, i) => data[i].party === "R" ? "crimson" : "royalblue")
+    .attr('x', 0) //was 0
+    .attr('y', (d, i) => y1(i))
+    .attr('height', y1.bandwidth())
+    .attr('width', d => x1(d.score))
+    .attr('class', 'rect')
+  
+
   svg1.node();
 }
 
