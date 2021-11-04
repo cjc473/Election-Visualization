@@ -53,7 +53,7 @@ const renderHighestGraph = function(data) {
     .call(d3.axisLeft(y1).tickFormat(i => data[i].name))
   
   svg1.selectAll('rect')
-    .data(data.sort((a, b) => d3.descending(a.score, b.score)))
+    .data(data.sort((a, b) => d3.ascending(a.score, b.score)))
     .enter()
     .append('rect')
     .attr('fill', (d, i) => data[i].party === "R" ? "crimson" : "royalblue")
@@ -105,14 +105,14 @@ const renderLowestGraph = function(data) {
 
   const y1 = d3.scaleBand()
     .domain(d3.range(data.length))
-    .range([0, height])
+    .range([height, 0])
     .padding(0.1);
 
   svg1.append("g")
     .call(d3.axisLeft(y1).tickFormat(i => data[i].name))
 
   svg1.selectAll('rect')
-    .data(data.sort((a, b) => d3.descending(a.score, b.score)))
+    .data(data.sort((a, b) => d3.ascending(a.score, b.score)))
     .enter()
     .append('rect')
     .attr('fill', (d, i) => data[i].party === "R" ? "crimson" : "royalblue")
@@ -245,7 +245,7 @@ function scoreAverager(topSenators, bottomSenators) {
     sum += topSenators[i].score
   }
   for (let i = 0; i < bottomSenators.length; i++) {
-    sum += topSenators[i].score
+    sum += bottomSenators[i].score
   }
   let avg = Math.floor(sum / (topSenators.length + bottomSenators.length));
   return avg ? avg : "No data for "
