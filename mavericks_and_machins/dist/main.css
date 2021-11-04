@@ -74,12 +74,45 @@ h2, form p {
   min-width: 50%;
 }
 
-#chart-legend {
+#chart-legend-container {
   display: flex;
-  justify-content: center;
-  background-color: white;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#chart-legend {
+  background-color: lightyellow;
   border: 1px black solid;
-  width: 50%;
+  width: 120px;
+  height: 60px;
+}
+
+#linkedin-and-github {
+  display: flex;
+  justify-content: right;
+}
+
+#chart-legend text {
+  margin-left: 15px;
+  opacity: 0.9;
+}
+
+#crimson-box {
+  height: 15px;
+  width: 10px;
+  margin: 3px;
+  background-color: crimson;
+  border: 1px solid black;
+  opacity: 0.9;
+}
+
+#royalblue-box {
+  height: 15px;
+  width: 10px;
+  margin: 3px;
+  background-color: royalblue;
+  border: 1px solid black;
+  opacity: 0.9;
 }
 
 #year-display h2 {
