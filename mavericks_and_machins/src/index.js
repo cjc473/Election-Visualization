@@ -21,11 +21,10 @@ let currentSession;
 
 const renderHighestGraph = function(data) {
 
-  const margin = { top: 20, bottom: 30, left: 90, right: 30 };
+  const margin = { top: 20, bottom: 30, left: 110, right: 30 };
 
   const width = 460 - margin.left - margin.right;
   const height = 400 - margin.top - margin.bottom;
-
 
   let svg1 = d3.select('#top-senate-container')
     .append('svg')
@@ -35,14 +34,14 @@ const renderHighestGraph = function(data) {
     .attr('transform', `translate(${margin.left}, ${margin.top})`)
 
   const x1 = d3.scaleLinear()
-    .domain([0, 100])
+    .domain([95, 100])
     .range([0, width]); //was margin.left
 
   svg1.append('g')
     .attr("transform", `translate(0, ${height})`)
-    .call(d3.axisBottom(x1))
+    .call(d3.axisBottom(x1).ticks(6))
     .selectAll("text")
-      .attr("transform", "translate(-10, 0)rotate(-45)")
+      .attr("transform", "translate(5, 0)")
       .style("text-anchor", "end")
   
   const y1 = d3.scaleBand()
@@ -53,67 +52,78 @@ const renderHighestGraph = function(data) {
   svg1.append("g")
     .call(d3.axisLeft(y1).tickFormat(i => data[i].name))
   
+  svg1.selectAll('rect')
+    .data(data.sort((a, b) => d3.descending(a.score, b.score)))
+    .enter()
+    .append('rect')
+    .attr('fill', (d, i) => data[i].party === "R" ? "crimson" : "royalblue")
+    .attr('opacity', '0.9')
+    .attr('x', 0) //was 0
+    .attr('y', (d, i) => y1(i))
+    .attr('height', y1.bandwidth())
+    .attr('width', d => x1(d.score))
+    .attr('class', 'rect')
+
+  // const xGrid = d3.axisBottom(x1)
+  //   .scale(y1)
+  //   .ticks(5)
+  //   .tickSizeInner(-width + margin.left + margin.right)
+
+  // svg1.append('g')
+  //   .attr('class', 'x-grid')
+  //   // .attr('transform', `translate(${margin.left})`)
+  //   .call(xGrid)
+  
+  svg1.node();
+}
+
+
+const renderLowestGraph = function(data) {
+
+  const margin = { top: 20, bottom: 30, left: 110, right: 30 };
+
+  const width = 460 - margin.left - margin.right;
+  const height = 400 - margin.top - margin.bottom;
+
+  let svg1 = d3.select('#top-senate-container')
+    .append('svg')
+    .attr('width', (width + margin.left + margin.right))
+    .attr('height', (height + margin.top + margin.bottom))
+    .append('g')
+    .attr('transform', `translate(${margin.left}, ${margin.top})`)
+
+  const x1 = d3.scaleLinear()
+    .domain([50, 100])
+    .range([0, width]); //was margin.left
+
+  svg1.append('g')
+    .attr("transform", `translate(0, ${height})`)
+    .call(d3.axisBottom(x1).ticks(6))
+    .selectAll("text")
+    .attr("transform", "translate(5, 0)")
+    .style("text-anchor", "end")
+
+  const y1 = d3.scaleBand()
+    .domain(d3.range(data.length))
+    .range([0, height])
+    .padding(0.1);
+
+  svg1.append("g")
+    .call(d3.axisLeft(y1).tickFormat(i => data[i].name))
 
   svg1.selectAll('rect')
     .data(data.sort((a, b) => d3.descending(a.score, b.score)))
     .enter()
     .append('rect')
     .attr('fill', (d, i) => data[i].party === "R" ? "crimson" : "royalblue")
+    .attr('opacity', '0.9')
     .attr('x', 0) //was 0
     .attr('y', (d, i) => y1(i))
     .attr('height', y1.bandwidth())
     .attr('width', d => x1(d.score))
     .attr('class', 'rect')
-  
 
   svg1.node();
-}
-
-
-const renderLowestGraph = function(data) {
-  // let svg1 = d3.select('#d3-container')
-  //   .append('svg')
-  //   .attr('width', (width - margin.left - margin.right) / 2)
-  //   .attr('height', (height - margin.top - margin.bottom) / 2)
-  //   .attr('viewBox', [0, 0, width, height])
-
-  // const x1 = d3.scaleLinear()
-  //   .domain([95, 100])
-  //   .range([500, width - margin.right]); //was margin.left
-
-  // const y1 = d3.scaleBand()
-  //   .domain(d3.range(data.length))
-  //   .range([0, height - margin.bottom])
-  //   .padding(0.1);
-
-  // const highestGraph = svg1
-  //   .append('g')
-  //   .attr('transform', `translate(${margin.left}, ${margin.top})`)
-  //   .selectAll('rect')
-  //   .data(data.sort((a, b) => d3.descending(a.score, b.score)))
-  //   .join('rect')
-  //   .attr('fill', (d, i) => data[i].party === "R" ? "crimson" : "royalblue")
-  //   .attr('x', 300) //was 0
-  //   .attr('y', (d, i) => y1(i))
-  //   .attr('height', y1.bandwidth())
-  //   .attr('width', d => x1(d.score) - x1(0))
-  //   .attr('class', 'rect')
-
-  // function xAxis(g) {
-  //   g.attr('transform', `translate(0, ${margin.top})`)
-  //     .call(d3.axisTop(x1).ticks(5)) //was null, data.format
-  //     .attr('font-size', '20px')
-  // }
-
-  // function yAxis(g) {
-  //   g.attr('transform', `translate(${margin.left + 300}, ${margin.top})`)
-  //     .call(d3.axisLeft(y1).tickFormat(i => data[i].name))
-  //     .attr('font-size', '20px')
-  // }
-
-  // svg1.append('g').call(yAxis)
-  // svg1.append('g').call(xAxis)
-  // svg1.node();
 }
 
 
@@ -219,10 +229,10 @@ function parseData(data) {
     const party = senator.party
     return { name, score, party }
   })
-  document.getElementById('d3-container').innerHTML = ""
-
-  renderLowestGraph(lowestSenators);
+  document.getElementById('top-senate-container').innerHTML = "";
+  document.getElementById('bottom-senate-container').innerHTML = "";
   renderHighestGraph(highestSenators);
+  renderLowestGraph(lowestSenators);
 }
 
 
