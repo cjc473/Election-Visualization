@@ -171,10 +171,6 @@ h2, form p {
   border: 1px solid black;
 }
 
-
-
-// EDIT STARTS HERE
-
 :root {
   --radio-filter-color: purple;
 }
@@ -199,8 +195,6 @@ input[type="radio"] {
   transition: opacity .1s;
 }
 
-
-
 input[type="radio"]::before {
   content: "";
   width: 0.80em;
@@ -219,8 +213,6 @@ input[type="radio"]:checked::before {
   margin-bottom: 0.5em;
 }
 
-// EDIT STARTS HERE
-
 #year-slider:hover {
   opacity: 1;
 }
@@ -229,8 +221,6 @@ input[type="radio"]:checked::before {
   display: flex;
   justify-content: space-around;
 }
-
-/////
 
 #graph-section > h1 {
   display: flex;
@@ -241,8 +231,17 @@ input[type="radio"]:checked::before {
   color: black;
   text-decoration: underline;
   text-decoration-color: black;
-  // background-color: purple;
-  // border: 1px solid black;
-  // text-shadow: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black,
+}
+
+#graph-section p {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 3px;
+  font-family: monospace;
+  font-size: 12px;
+  color: black;
+
+
 }
 

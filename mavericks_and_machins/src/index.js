@@ -229,10 +229,26 @@ function parseData(data) {
     const party = senator.party
     return { name, score, party }
   })
+
+  const avgScore = scoreAverager(highestSenators, lowestSenators)
   document.getElementById('top-senate-container').innerHTML = "";
   document.getElementById('bottom-senate-container').innerHTML = "";
+  document.getElementById('average-score').innerHTML = `${avgScore}%`
   renderHighestGraph(highestSenators);
   renderLowestGraph(lowestSenators);
+}
+
+
+function scoreAverager(topSenators, bottomSenators) {
+  let sum = 0;
+  for (let i = 0; i < topSenators.length; i++) {
+    sum += topSenators[i].score
+  }
+  for (let i = 0; i < bottomSenators.length; i++) {
+    sum += topSenators[i].score
+  }
+  let avg = Math.floor(sum / (topSenators.length + bottomSenators.length));
+  return avg ? avg : "No data for "
 }
 
 
