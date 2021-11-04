@@ -74,6 +74,14 @@ h2, form p {
   min-width: 50%;
 }
 
+#chart-legend {
+  display: flex;
+  justify-content: center;
+  background-color: white;
+  border: 1px black solid;
+  width: 50%;
+}
+
 #year-display h2 {
   font-family: monospace;
   font-size: 36px;
@@ -83,8 +91,8 @@ h2, form p {
 
 #year-slider-container {
   display: flex;
-  justify-content: center;
-  flex-direction: row;
+  flex-direction: column;
+  align-items: center;
   width: 100%;
   font-family: monospace;
 }
@@ -173,6 +181,11 @@ input[type=radio]:checked::before {
 
 #year-slider:hover {
   opacity: 1;
+}
+
+#chart-titles {
+  display: flex;
+  justify-content: space-around;
 }
 
 #graph-section > h1 {

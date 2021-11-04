@@ -34,7 +34,7 @@ const renderHighestGraph = function(data) {
     .attr('transform', `translate(${margin.left}, ${margin.top})`)
 
   const x1 = d3.scaleLinear()
-    .domain([95, 100])
+    .domain([92, 100])
     .range([0, width]); //was margin.left
 
   svg1.append('g')
@@ -207,9 +207,9 @@ function parseData(data) {
   allSenators = allSenators.sort((a, b) => a.votes_with_party_pct - b.votes_with_party_pct);
 
   let senatorCount;
-  allSenators.length < 30 ? (senatorCount = allSenators.length) / 2 : senatorCount = 15;
+  allSenators.length < 30 ? (senatorCount = (allSenators.length / 2)): senatorCount = 15;
 
-  console.log(data);
+  console.log(senatorCount);
   console.log(allSenators);
 
   const highestSenators = allSenators.slice(allSenators.length - senatorCount).map(senator => {
