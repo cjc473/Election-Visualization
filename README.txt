@@ -1,3 +1,7 @@
+//github: https://cjc473.github.io/Election-Visualization/ //
+
+//README is out of date as of 10/30/21 - update to follow after project is revisted //
+
 Mavericks and Manchins
 
 Background
