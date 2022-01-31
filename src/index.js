@@ -251,6 +251,16 @@ function scoreAverager(topSenators, bottomSenators) {
   return avg ? avg : "No data for "
 }
 
+function retrieveAllData(api, yrs) {
+  for (let i = 0; i < yrs.length; i++) {
+    const yr = yrs[i];
+    api.getData(yr)
+      .then(data => {
+        store[yr] = data
+        parseData(data)
+      })
+  }
+}
 
 function renderData(api, yr=117) {
   currentSession = yr;
@@ -264,5 +274,6 @@ function renderData(api, yr=117) {
     })  
 }
 
+retrieveAllData(CongressApi, [111, 112, 113, 114, 115, 116, 117])
 renderData(CongressApi);
 updateYearDisplay(2020)
