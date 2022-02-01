@@ -1,7 +1,7 @@
 import * as d3 from "d3";
 import CongressApi from "./scripts/congress_api_util"
 import FundraisingApi from "./scripts/fundraising_api_util"
-console.log("asdf")
+console.log("adfdsfdf")
 console.log("store")
 
 // setting up boundaries for each chart
