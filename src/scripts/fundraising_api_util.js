@@ -1,4 +1,4 @@
-console.log("test");
+
 
 const FundraisingApi = { 
   getData: function (cycle = 2020) {

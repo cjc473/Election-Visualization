@@ -1,4 +1,4 @@
-console.log("test");
+
 
 const CongressApi = {
   getData: function(session = 108) {

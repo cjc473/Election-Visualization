@@ -4,7 +4,7 @@ import FundraisingApi from "./scripts/fundraising_api_util"
 console.log("adfdsfdf")
 console.log("store")
 //test push
-
+// reset main.js
 // setting up boundaries for each chart
 
 
@@ -36,7 +36,7 @@ const renderHighestGraph = function(data) {
     .attr('transform', `translate(${margin.left}, ${margin.top})`)
 
   const x1 = d3.scaleLinear()
-    .domain([92, 100])
+    .domain([90, 100]) //was 92
     .range([0, width]); //was margin.left
 
   svg1.append('g')
