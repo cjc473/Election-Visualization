@@ -65,10 +65,27 @@ h2, form p {
 }
 
 #d3-container {
+  display: flex;
   font-family: monospace;
-  flex-basis: 0;
+  flex-direction: column;
+  /* flex-basis: 0;
   flex-grow: 999;
-  min-width: 50%;
+  min-width: 50%; */
+}
+
+#chart-container {
+  display: flex;
+}
+
+.chart {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+}
+
+.chart-titles {
+  display: flex;
+  justify-content: left;
 }
 
 #chart-legend-container {
@@ -82,16 +99,10 @@ h2, form p {
   border-radius: 10px;
   color: black;
   text-shadow: 0.5px 0.5px silver;
-  
 }
 
 #chart-legend {
-  // display: flex;
-  // flex-direction: row;
-  // justify-content: center;
   background-color: lightyellow;
-  // border: 1px black solid;
-  // border-radius: 25%;
   width: 120px;
   height: 60px;
 }
@@ -101,7 +112,7 @@ h2, form p {
   justify-content: right;
 }
 
-#chart-legend text{
+#chart-legend text {
   margin-left: 15px;
   opacity: 0.9;
   font-size: 14px;
@@ -116,7 +127,7 @@ h2, form p {
   opacity: 0.9;
 }
 
-#royalblue-box{
+#royalblue-box {
   height: 15px;
   width: 10px;
   margin: 3px;
@@ -132,7 +143,6 @@ h2, form p {
   text-shadow: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black;
 }
 
-
 #year-slider-container {
   display: flex;
   flex-direction: column;
@@ -140,6 +150,7 @@ h2, form p {
   width: 100%;
   font-family: monospace;
 }
+
 #slider-ticks {
   display: flex;
   font-size: 10px;
@@ -166,7 +177,7 @@ h2, form p {
   outline: none;
   border: 1px solid black;
   opacity: 0.8;
-  transition: opacity .2s;
+  transition: opacity 0.2s;
   box-shadow: 3px 2px purple;
 }
 
@@ -185,10 +196,10 @@ h2, form p {
 }
 
 #filters-container {
-  margin: 2px
+  margin: 2px;
 }
 
-input[type="radio"] {
+input[type=radio] {
   -webkit-appearance: none;
   appearance: none;
   background-color: white;
@@ -201,20 +212,20 @@ input[type="radio"] {
   transform: translateY(-0.1em);
   display: grid;
   place-content: center;
-  transition: opacity .1s;
+  transition: opacity 0.1s;
 }
 
-input[type="radio"]::before {
+input[type=radio]::before {
   content: "";
-  width: 0.80em;
-  height: 0.80em;
+  width: 0.8em;
+  height: 0.8em;
   border-radius: 25%;
   transform: scale(0);
   transition: 140ms transform ease-in-out;
   box-shadow: inset 1em 1em var(--radio-filter-color);
 }
 
-input[type="radio"]:checked::before {
+input[type=radio]:checked::before {
   transform: scale(1);
 }
 
@@ -224,11 +235,6 @@ input[type="radio"]:checked::before {
 
 #year-slider:hover {
   opacity: 1;
-}
-
-#chart-titles {
-  display: flex;
-  justify-content: space-around;
 }
 
 #graph-section > h1 {
@@ -265,3 +271,5 @@ input[type="radio"]:checked::before {
 #average-score {
   margin-right: 100px;
 }
+
+//version 1
