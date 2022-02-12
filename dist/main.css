@@ -68,10 +68,27 @@ h2, form p {
 }
 
 #d3-container {
+  display: flex;
   font-family: monospace;
-  flex-basis: 0;
+  flex-direction: column;
+  /* flex-basis: 0;
   flex-grow: 999;
-  min-width: 50%;
+  min-width: 50%; */
+}
+
+#chart-container {
+  display: flex;
+}
+
+.chart {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+}
+
+.chart-titles {
+  display: flex;
+  justify-content: left;
 }
 
 #chart-legend-container {
@@ -221,11 +238,6 @@ input[type=radio]:checked::before {
 
 #year-slider:hover {
   opacity: 1;
-}
-
-#chart-titles {
-  display: flex;
-  justify-content: space-around;
 }
 
 #graph-section > h1 {
